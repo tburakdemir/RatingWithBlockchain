@@ -18,19 +18,60 @@ app.post('/', (req, res, ) => {
     res.send(req.body)
 })
 
-app.post('/sendFeedback', (req, res) => {
-    console.log(req.query.user);
-    console.log(req.query.date);
-    let doc = new FeedbackModel()
+
+/* Example
+{
+	"message": "Perfect!!",
+	"likes": 5,
+	"dislikes": 0,
+	"postedTo": "Ali Demir"
+}
+*/
+app.post('/sendFeedback', async (req, res) => {
+    let student = await StudentModel.findOne({ fullName: req.query.postedBy });
+    let teacher = await TeacherModel.findOne({ fullName: req.body.postedTo });
+    if (student && teacher) {
+        req.body.postedBy = student._id;
+        req.body.postedTo = teacher._id;
+        let doc = new FeedbackModel(req.body)
+        doc.save()
+            .then(() => res.send("Success"))
+            .catch((err) => res.send('Error' + err));
+
+        console.log(student._id)
+    }
+
+
 })
 
-
+/** Example
+{
+    "fullName": "Burak Demir"
+}
+ */
 app.post('/newStudent', (req, res) => {
     let doc = new StudentModel(req.body);
     doc.save()
         .then(() => res.send("Success"))
         .catch(() => res.send('Error'));
 
+})
+
+/**
+{
+	"fullName": "Ali Demir",
+	"lectures": [
+			"CSE 5000",
+			"CSE 5001",
+			"CSE 1000"
+		]
+}
+ */
+app.post('/newTeacher', (req, res) => {
+    let doc = new TeacherModel(req.body);
+    doc.save()
+        .then(() => res.send('Success'))
+        .catch(() => res.send('Error'));
 })
 
 app.get('/students', (req, res) => {
@@ -43,13 +84,6 @@ app.get('/teachers', (req, res) => {
     TeacherModel.find({}, (err, teachers) => {
         res.send(teachers)
     })
-})
-
-app.post('/newTeacher', (req, res) => {
-    let doc = new TeacherModel(req.body);
-    doc.save()
-        .then(() => res.send('Success'))
-        .catch(() => res.send('Error'));
 })
 
 
