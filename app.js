@@ -13,9 +13,6 @@ var StudentModel = require('./models/student');
 var TeacherModel = require('./models/teacher');
 
 
-
-app.get('/', (req, res) => res.send("Hello World !"))
-
 app.post('/', (req, res, ) => {
     console.log(req.body);
     res.send(req.body)
@@ -48,7 +45,6 @@ app.get('/teachers', (req, res) => {
     })
 })
 
-
 app.post('/newTeacher', (req, res) => {
     let doc = new TeacherModel(req.body);
     doc.save()
@@ -57,6 +53,10 @@ app.post('/newTeacher', (req, res) => {
 })
 
 
+// Always Last Route
+app.get('*', function (req, res) {
+    res.status(404).send('404 Page');
+});
 
 
 app.listen(port, () => console.log(`Listenin on port: ${port}`));
