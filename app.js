@@ -5,7 +5,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 require('dotenv').config();
 require('./db');
-const port = process.env.SERVER_PORT;
+const port = process.env.PORT;
 
 
 var FeedbackModel = require('./models/feedback');
