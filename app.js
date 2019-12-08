@@ -91,9 +91,9 @@ app.get('/teachers', (req, res) => {
 
 
 // Always Last Route
-app.get('*', function (req, res) {
-    res.status(404).send('404 Page');
-});
+// app.get('*', function (req, res) {
+//     res.status(404).send('404 Page');
+// });
 
 
 app.listen(port, () => console.log(`Listenin on port: ${port}`));

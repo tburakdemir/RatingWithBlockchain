@@ -1,39 +1,47 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
+import MySidebar from './MySidebar';
+import StackableMenu from './StackableMenu'
 
+
+import { Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react'
 class App extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
-  
+
     this.state = {
-      text: [],  }
+      text: [],
+      sideBarVisible: true
+
+    }
   }
 
-  componentWillMount(){
+  componentWillMount() {
 
     axios.get('http://localhost:3000/teachers').then(res => {
       console.log(res.data)
-      this.setState({text: res.data});
+      this.setState({ text: res.data });
     })
   }
 
-  getlist(){
-    return this.state.text.map((element, key) =>  
+  getlist() {
+    return this.state.text.map((element, key) =>
       <li key>{element.fullName}</li>)
   }
 
-  render(){
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-           {this.getlist()} 
-      </header>
-    </div>
-  );}
+
+  render() {
+
+    return (
+      <div>
+        <StackableMenu visible={this.state.sideBarVisible}></StackableMenu>
+        {/* <MySidebar visible={this.state.sideBarVisible}></MySidebar> */}
+
+      </div >
+    );
+  }
 }
 
 export default App;
