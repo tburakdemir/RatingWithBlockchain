@@ -2,6 +2,7 @@ let mongoose = require("mongoose");
 
 let studentSchema = new mongoose.Schema({
     fullName: { type: String, unique: true },
+    avatar: String,
     createdAt: Date,
 });
 

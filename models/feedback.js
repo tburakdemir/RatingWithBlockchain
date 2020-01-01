@@ -2,8 +2,9 @@ let mongoose = require("mongoose");
 
 
 let feedbackSchema = new mongoose.Schema({
-    postedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'Student' },
-    postedTo: { type: mongoose.Schema.Types.ObjectId, ref: 'Teacher' },
+    postedBy: String,
+    postedTo: String,
+    avatar: String,
     message: String,
     likes: Number,
     dislikes: Number,

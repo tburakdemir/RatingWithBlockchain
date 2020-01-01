@@ -33,24 +33,22 @@ class MySidebar extends React.Component {
                 <Menu.Item as='a'>
                     <Icon name='home' />
                     Home
-</Menu.Item>
+                </Menu.Item>
                 <Menu.Item as='a'>
                     <Icon name='gamepad' />
                     Games
-</Menu.Item>
+                </Menu.Item>
                 <Menu.Item as='a'>
                     <Icon name='camera' />
                     Channels
-</Menu.Item>
+                </Menu.Item>
                 <Menu.Item as='button'
                     onClick={() => this.setVisible(false)}
                 >
                     <Icon name="home">
                         Hide
-            </Icon>
+                    </Icon>
                 </Menu.Item>
-
-
             </Sidebar>
         </Sidebar.Pushable >
     }

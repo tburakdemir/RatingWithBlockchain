@@ -2,9 +2,18 @@ import React, { Component } from 'react'
 import { Label, Menu, Tab } from 'semantic-ui-react'
 import MyFeed from './MyFeed';
 import NewFeedback from './NewFeedback';
+import Blockchain from './Blockchain';
 
 export default class MenuExampleStackable extends Component {
-    state = {}
+
+    constructor(props) {
+        super(props)
+        this.state = {}
+
+        console.log("stackable")
+        console.log(props.feedbacks)
+
+    }
 
     handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
@@ -12,11 +21,15 @@ export default class MenuExampleStackable extends Component {
         const panes = [
             {
                 menuItem: { key: 'feed', icon: 'content', content: 'Akış' },
-                render: () => <MyFeed></MyFeed>,
+                render: () => <MyFeed feedbacks={this.props.feedbacks}></MyFeed>,
             },
             {
                 menuItem: { key: 'newFeedback', icon: 'edit', content: 'Yeni Geri Bildirim' },
                 render: () => <NewFeedback></NewFeedback>,
+            },
+            {
+                menuItem: { key: 'blockchain', icon: 'chain', content: 'Blok Zinciri Görüntüle' },
+                render: () => <Blockchain></Blockchain>,
             },
 
             // {
