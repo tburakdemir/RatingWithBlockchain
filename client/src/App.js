@@ -24,17 +24,36 @@ class App extends Component {
 
   componentDidMount() {
     const { endpoint } = this.state;
-
-  }
-
-  componentWillMount() {
     axios.get('/api/teachers').then(res => {
       console.log(res.data)
       this.setState({ text: res.data });
     })
+    console.log("href");
+
+    console.log(window.location.href);
+
+    const socket = socketIOClient(window.location.href)
+
+    socket.on("connect", () => {
+      console.log("connected to server");
+
+    })
+
+    socket.on("data", (data) => {
+      console.log("get data from server");
+      console.log(data);
+
+    })
+
+    socket.on("disconnect", () => {
+      console.log("disconnected to server");
+
+    })
 
 
   }
+
+
 
   click() {
     const { endpoint } = this.state;

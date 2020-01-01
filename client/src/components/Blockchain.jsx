@@ -11,7 +11,7 @@ export default class Blockchain extends React.Component {
         }
 
     }
-    componentWillMount() {
+    componentDidMount() {
         axios.get('/api/feedbacks').then(res => {
             console.log("feedbacks")
             console.log(res.data)

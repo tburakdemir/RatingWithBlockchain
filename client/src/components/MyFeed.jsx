@@ -34,7 +34,7 @@ export default class MyFeed extends React.Component {
         this.setState({ feedback: newArr }) //set the new state
     }
 
-    componentWillMount() {
+    componentDidMount() {
         axios.get('/api/feedbacks').then(res => {
             console.log("feedbacks")
             console.log(res.data)
