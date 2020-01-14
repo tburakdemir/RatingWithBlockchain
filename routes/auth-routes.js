@@ -30,12 +30,12 @@ router.get('/outlook/callback',
     console.log(encrypted.toString());
     // var decrypted = CryptoJS.AES.decrypt(encrypted.toString(), "Secret Passphrase");
     //console.log(decrypted.toString(CryptoJS.enc.Utf8));
-    res.redirect(`http://192.168.1.194:3000/profile/?code=${new Buffer(encrypted.toString()).toString('base64')}`);
+    res.redirect(`http://192.168.1.122:3000/profile/?code=${new Buffer(encrypted.toString()).toString('base64')}`);
   });
 
 router.get('/logout', function (req, res) {
   req.logout();
-  res.redirect('http://192.168.1.194:3000');
+  res.redirect('http://192.168.1.122:3000');
 });
 
 
