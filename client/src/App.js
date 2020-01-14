@@ -7,7 +7,6 @@ import CryptoJS from 'crypto-js';
 import Home from './components/Home'
 import Login from './components/Login'
 import Profile from './components/Profile'
-import socketIOClient from "socket.io-client";
 import AppBar from './components/AppBar'
 
 
@@ -30,9 +29,6 @@ class App extends Component {
     }
   }
 
-  componentWillMount() {
-
-  }
 
   componentDidMount() {
     const { endpoint } = this.state;
@@ -68,23 +64,23 @@ class App extends Component {
 
     console.log(window.location.href);
 
-    const socket = socketIOClient(window.location.href)
+    // const socket = socketIOClient(window.location.href)
 
-    socket.on("connect", () => {
-      console.log("connected to server");
+    // socket.on("connect", () => {
+    //   console.log("connected to server");
 
-    })
+    // })
 
-    socket.on("data", (data) => {
-      console.log("get data from server");
-      console.log(data);
+    // socket.on("data", (data) => {
+    //   console.log("get data from server");
+    //   console.log(data);
 
-    })
+    // })
 
-    socket.on("disconnect", () => {
-      console.log("disconnected to server");
+    // socket.on("disconnect", () => {
+    //   console.log("disconnected to server");
 
-    })
+    // })
   }
 
 
