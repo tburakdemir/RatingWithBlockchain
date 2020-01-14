@@ -26,7 +26,7 @@ module.exports = function (app) {
     passport.use(new OutlookStrategy({
         clientID: OUTLOOK_CLIENT_ID,
         clientSecret: OUTLOOK_CLIENT_SECRET,
-        callbackURL: "http://192.168.1.194:5000/api/auth/outlook/callback"
+        callbackURL: "https://ratingwithblockchain.herokuapp.com/api/auth/outlook/callback"
     },
         function (accessToken, refreshToken, profile, done) {
             // asynchronous verification, for effect...
