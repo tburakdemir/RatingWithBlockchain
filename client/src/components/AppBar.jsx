@@ -42,7 +42,7 @@ export default function ButtonAppBar(props) {
                     <Typography variant="h6" className={classes.title}>
                         News
           </Typography>
-                    {props.user ? <Button color="inherit" onClick={handleLogout}>Logout</Button> : ""}
+                    {props.user ? <a href={"/logout"} ><Button color="inherit" onClick={handleLogout}>Logout</Button></a> : ""}
                 </Toolbar>
             </AppBar>
         </div>

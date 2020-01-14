@@ -10,7 +10,7 @@ function getFeedbacks(req, res) {
     if (req.query.teacher)
         filter = { postedTo: req.query.teacher }
 
-    FeedbackModel.find(filter, (err, feedbacks) => {
+    FeedbackModel.find(filter).sort({ "_id": -1 }).exec((err, feedbacks) => {
         res.send(feedbacks)
     })
 }
