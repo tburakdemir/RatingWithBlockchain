@@ -23,10 +23,10 @@ export default class MenuExampleStackable extends Component {
                 menuItem: { key: 'feed', icon: 'content', content: 'Akış' },
                 render: () => <MyFeed feedbacks={this.props.feedbacks}></MyFeed>,
             },
-            {
+            this.props.user ? {
                 menuItem: { key: 'newFeedback', icon: 'edit', content: 'Yeni Geri Bildirim' },
-                render: () => <NewFeedback></NewFeedback>,
-            },
+                render: () => <NewFeedback user={this.props.user}></NewFeedback>,
+            } : null,
             {
                 menuItem: { key: 'blockchain', icon: 'chain', content: 'Blok Zinciri Görüntüle' },
                 render: () => <Blockchain></Blockchain>,

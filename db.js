@@ -13,7 +13,8 @@ class Database {
             .connect(`mongodb+srv://${DB_USER}:${DB_PASS}@${DB_HOST}/test?retryWrites=true&w=majority`, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
-                useCreateIndex: true
+                useCreateIndex: true,
+                useFindAndModify: false
             })
             .then(() => {
                 console.log("Database connection successful");

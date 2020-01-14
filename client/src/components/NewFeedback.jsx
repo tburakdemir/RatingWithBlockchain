@@ -25,9 +25,11 @@ export default class MenuExampleStackable extends Component {
         this.setState({ submittedName: teacherName, submittedEmail: feedback })
         this.setState({ teacherName: "" })
         this.setState({ feedback: "" })
-        Axios.post("/api/feedbacks", { feedback: { message: feedback, likes: 0, dislikes: 0, postedTo: teacherName, postedBy: "Burak Demir" } })
+        Axios.post("/api/feedbacks", { feedback: { message: feedback, likes: 0, dislikes: 0, postedTo: teacherName, postedBy: this.props.user.DisplayName } })
         console.log(teacherName)
         console.log(feedback)
+        console.log(this.props.user.DisplayName);
+
     }
 
     render() {

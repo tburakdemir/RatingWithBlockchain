@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { Feed, Icon, ItemDescription } from 'semantic-ui-react'
+import { Feed, Icon, Dropdown } from 'semantic-ui-react'
 import Moment from 'react-moment';
 import 'moment/locale/tr'
 
@@ -11,7 +11,8 @@ export default class MyFeed extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            feedbacks: []
+            feedbacks: [],
+            filteredFeedbacks: []
         }
 
     }
@@ -39,18 +40,43 @@ export default class MyFeed extends React.Component {
             console.log("feedbacks")
             console.log(res.data)
             this.setState({ feedbacks: res.data })
+            this.setState({ filteredFeedbacks: res.data })
         })
     }
 
+    filterItems = () => {
+        console.log("Close dropdown");
+        //console.log(this.state.value);
+    }
+
+    handleChange = (e, { value }) => {
+        this.setState({ value })
+        console.log(value);
+        axios.get(`/api/feedbacks?teacher=${value}`).then(res => {
+            console.log("filtered");
+            this.setState({ filteredFeedbacks: res.data })
+        })
+
+    }
     render() {
-        const renderItems = this.state.feedbacks.map((item, i) => {
+
+        const teachers = [
+            { key: 'gokturk', text: 'Mehmet GÖKTÜRK', value: 'Mehmet GÖKTÜRK' },
+            { key: 'kaya', text: 'Gökhan KAYA', value: 'Gökhan KAYA' },
+            { key: 'mantar', text: 'Hacı Ali MANTAR', value: 'Hacı Ali MANTAR' },
+            { key: 'gozupek', text: 'Didem GÖZÜPEK', value: 'Didem GÖZÜPEK' },
+            { key: 'sevilgen', text: 'Fatih Erdoğan SEVİLGEN', value: 'Fatih Erdoğan SEVİLGEN' },
+            { key: 'zergeroglu', text: 'Erkan ZERGEROĞLU', value: 'Erkan ZERGEROĞLU' },
+        ]
+
+        const renderItems = this.state.filteredFeedbacks.map((item, i) => {
 
             return <Feed.Event key={item._id}>
                 <Feed.Label image={item.avatar} />
                 <Feed.Content>
                     <Feed.Date><Moment locale='tr' fromNow>{item.createdAt}</Moment></Feed.Date>
                     <Feed.Summary>
-                        <a>{item.postedBy}</a> <a>{item.postedTo}</a> hakkında bir geri bildirim yazdı.
+                        <a href={`/students/${item.postedBy}`}>{item.postedBy}</a> <a>{item.postedTo}</a> hakkında bir geri bildirim yazdı.
                     </Feed.Summary>
                     <Feed.Extra text>
                         {item.message}
@@ -70,9 +96,20 @@ export default class MyFeed extends React.Component {
             </Feed.Event>
         });
         return (
-            <Feed>
-                {renderItems}
-            </Feed>
+            <div>
+                <Dropdown
+                    placeholder='Select Country'
+                    fluid
+                    search
+                    selection
+                    options={teachers}
+                    onClose={this.filterItems}
+                    onChange={this.handleChange}
+                />
+                <Feed>
+                    {renderItems}
+                </Feed>
+            </div>
         );
 
     }
